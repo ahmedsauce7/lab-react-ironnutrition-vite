@@ -13,6 +13,10 @@ function App() {
   const submitForm = (newFood) => {
     setFoods([...foods, newFood])
   }
+  const deleteSubmit = (deletedfood) => {
+    const newFood = foods.filter((food) => food !== deletedfood)
+    setFoods(newFood)
+  }
   return (
     <div className='App'>
 <div>
@@ -20,10 +24,10 @@ function App() {
       <h1>Food List</h1>
       <Row className='rowantd'>
       {filterFoods.length>0 ? filterFoods.map((food,index) => (
-        <FoodBox key={index} food={food}/>
+        <FoodBox key={index} food={food} onDelete={deleteSubmit}/>
       ))
       : foods.map((food, index) => (
-        <FoodBox key={index} food={food}/>
+        <FoodBox key={index} food={food} onDelete={deleteSubmit}/>
       ))}
       </Row>
     </div>

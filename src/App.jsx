@@ -1,34 +1,63 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
 import './App.css'
+import {Row} from 'antd'
+import foodsData from './foods.json'
+import FoodBox from './FoodBox';
+import AddFoodForm from './AddFoodForm';
+import Search from './Search';
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [foods, setFoods] = useState(foodsData);
+  const [filterFoods, setFilterFoods] = useState('');
+  const submitForm = (newFood) => {
+    setFoods([...foods, newFood])
+  }
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <div className='App'>
+<div>
+      <Search food={foods} setFilterFoods={setFilterFoods} />
+      <h1>Food List</h1>
+      <Row className='rowantd'>
+      {filterFoods.length>0 ? filterFoods.map((food,index) => (
+        <FoodBox key={index} food={food}/>
+      ))
+      : foods.map((food, index) => (
+        <FoodBox key={index} food={food}/>
+      ))}
+      </Row>
     </div>
-  )
+    <AddFoodForm addFood={submitForm}/>
+  </div>
+  ) 
 }
 
+
+// for iteration 3
+// {/* <Row className='rowantd'>
+// {foods.map((oneFood,index) => (
+//   <FoodBox key={index} food={oneFood}/>
+// ))}
+// </Row> */}
+
+//     for iteration one
+//     <div className='App'>
+//     {foodsData.map((oneFood) => (
+//       <div key={oneFood.id}>
+//       <p>{oneFood.name} </p>
+//       <img src={oneFood.image} alt={oneFood.name} width={100} />
+//     </div>
+//     ))}
+
+//   for iteration 2  
+// { <FoodBox
+//   food={{
+//     name: 'Orange',
+//     calories: 85,
+//     image: 'https://i.imgur.com/abKGOcv.jpg',
+//     servings: 1,
+//   }}
+// />}
+
 export default App
+

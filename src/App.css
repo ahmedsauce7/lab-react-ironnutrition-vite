@@ -5,6 +5,10 @@
   text-align: center;
 }
 
+p{
+  margin: 5px;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -39,4 +43,9 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.rowantd{
+  width: 100%;
+  justify-content: center;
 }
